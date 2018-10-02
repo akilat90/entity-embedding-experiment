@@ -15,6 +15,8 @@ Walk through the notebooks in the below order:
 
 Most of the code for the network and the related processing is in [embed_helpers.py](embed_helpers.py).
 
+Model serving code is available at server.py
+
 ---
 
 Since the models and the data are already available in the repo, you don't need to run the notebooks 1-3 if you just want to test the API; If so, just run the 4th notebook 
