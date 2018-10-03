@@ -72,7 +72,7 @@ I'd say this is a baseline experiment and there's so much room to improve upon t
 * The problem is an imbalnced class problem where the class 0 : class 1 ratio is about 1:3. Evaluation metrics other than accuracy (like AUC ROC/PRC, F1 score needs to be considered.
 * Accomodating an unknown category for each column to avoid the embedding matrix look-up errors.
 
-### Some interesting related posts:
+### Some related posts:
 
 1. [Applying deep learning to Related Pins](https://medium.com/the-graph/applying-deep-learning-to-related-pins-a6fee3c92f5e) by Pinterest.
 2. [Instacart's categorical embedding blog post](https://tech.instacart.com/deep-learning-with-emojis-not-math-660ba1ad6cdc)
