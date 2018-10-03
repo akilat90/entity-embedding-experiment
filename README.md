@@ -15,7 +15,10 @@ As defined in the `make_embedding_network()` function in [embed_helpers.py](http
 
 Note how the categorical variables (columns that have `_cat` in their name) have a single input (a number) and all other numeric variables are collected together to a one array (`[age 	fnlwgt 	education.num 	capital.gain 	capital.loss 	hours.per.week]`) - these numeric values will ideally be normalized when feeding to the network.
 
-The integer each category is assigned is the Label encoded value for the category value. The below is an illustration when the `workclass_cat` value is `2`.
+The integer each category is assigned is the Label encoded value for the category value. The below is an illustration when the `workclass_cat` value is `2`. Note that the `workclass_cat` column has seven different categories: 
+
+    ['Federal-gov', 'Local-gov', 'Private', 'Self-emp-inc',
+       'Self-emp-not-inc', 'State-gov', 'Without-pay']
 
 ![wc](https://github.com/akilat90/entity-embedding-experiment/blob/master/img/work_class_input.png)
 
@@ -67,6 +70,7 @@ I'd say this is a baseline experiment and there's so much room to improve upon t
 * using better cross-validation strategies. 
 * Using the learned categorical embeddings in a different model.
 * The problem is an imbalnced class problem where the class 0 : class 1 ratio is about 1:3. Evaluation metrics other than accuracy (like AUC ROC/PRC, F1 score needs to be considered.
+* Accomodating an unknown category for each column to avoid the embedding matrix look-up errors.
 
 ### Some interesting related posts:
 
