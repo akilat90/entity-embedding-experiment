@@ -49,5 +49,6 @@ I'd say this is a baseline experiment and there's so much room to improve upon t
 
 1. [Applying deep learning to Related Pins](https://medium.com/the-graph/applying-deep-learning-to-related-pins-a6fee3c92f5e) by Pinterest.
 2. [Instacart's categorical embedding blog post](https://tech.instacart.com/deep-learning-with-emojis-not-math-660ba1ad6cdc)
+3. [fast.ai blog on deep learning for tabular data](http://www.fast.ai/2018/04/29/categorical-embeddings/)
 
 This repo is mostly inspired by the [repo](https://github.com/entron/entity-embedding-rossmann) by the authors of the original paper and [this kernel](https://www.kaggle.com/aquatic/entity-embedding-neural-net/code) in kaggle.
