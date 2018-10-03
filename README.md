@@ -4,6 +4,8 @@ Deep learning has proven to be outperforming the traditional machine learning me
 
 This project details an experiment done for the categorical entity embedding task using the famous [Adult Data Set](https://archive.ics.uci.edu/ml/datasets/adult), where the goal is to predit if the income of a particular person will be less than or greater than 50K USD. Once a model is built an API is developed to use the model assuming a case where the user sends a file and expects the predictions.
 
+---
+
 ## A note about the network architecture
 
 As defined in the `make_embedding_network()` function in [embed_helpers.py](https://github.com/akilat90/entity-embedding-experiment/blob/master/embed_helpers.py), the network accepts a list of input arrays, where each categorical column is represented by a one array and all the numeric columns in another one array. Considering a single instance of the network input for the Adult data set, the input should look like below:
@@ -11,11 +13,19 @@ As defined in the `make_embedding_network()` function in [embed_helpers.py](http
     workclass_cat 	education_cat 	marital.status_cat 	occupation_cat 	relationship_cat 	race_cat 	sex_cat 	native.country_cat 	age 	fnlwgt 	education.num 	capital.gain 	capital.loss 	hours.per.week
        [2] 	        [11] 	            [6] 	        [3]     	         [1]     	     [4]     	   [0]     	           [38]         [82 	132870 	        9 	            0 	        4356 	    18]
 
-Note how the categorical variables(columns that have `_cat` in their name) have a single input (a number) and all other numeric variables are collected together to a one array (`[age 	fnlwgt 	education.num 	capital.gain 	capital.loss 	hours.per.week]`) - these numeric values will ideally be normalized when feeding to the network.
+Note how the categorical variables (columns that have `_cat` in their name) have a single input (a number) and all other numeric variables are collected together to a one array (`[age 	fnlwgt 	education.num 	capital.gain 	capital.loss 	hours.per.week]`) - these numeric values will ideally be normalized when feeding to the network.
 
 The integer each category is assigned is the Label encoded value for the category value. The below is an illustration when the `workclass_cat` value is `2`.
 
-[!img/work_class_input.png]
+![wc](https://github.com/akilat90/entity-embedding-experiment/blob/master/img/work_class_input.png)
+
+The W matrix (of size 7 x 3) is the embedding matrix for the categorical variable `workclass_cat`. Since there are 7 different categories for the `workclass_cat`, there are seven rows in the embedding matrix - one row for each category. 3 is the dimensionality of the vector space that we wish to map the category's values, which is a parameter of our choice.
+
+The output from the three units are then passed to the second layer. This process happens the same way to all the categorical variables whereas the numeric columns just get fed to the second layer directly.
+
+Once the network is trained for a classification task, we can obtain the W matrices for each category, that happen to be the weights of the network and categorical embeddings at the same time.
+
+---
 
 ## Method of execution
 
