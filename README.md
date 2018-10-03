@@ -15,22 +15,40 @@ Walk through the notebooks in the below order:
 
 Most of the code for the network and the related processing is in [embed_helpers.py](embed_helpers.py).
 
-Model serving code is available at server.py
+Model serving code is available at [server.py](https://github.com/akilat90/entity-embedding-experiment/blob/master/server.py)
 
 ---
 
-Since the models and the data are already available in the repo, you don't need to run the notebooks 1-3 if you just want to test the API; If so, just run the 4th notebook 
+### Local run instructions
 
-Clone the repo and walk through the notebooks in the order of their numbering for a complete walkthrough. The project equires a keras installation with tensorflow backend,  pandas, numpy , matplotlib, flask and requests packages. (I'll update a requirements.txt later)
+You can use the [Floydhub docker image](https://github.com/floydhub/dl-docker). You may need to follow these steps:
 
+    docker pull floydhub/dl-docker:cpu
+    docker run -it -p 8888:8888 -p 5000:5000 -v /sharedfolder:/root/sharedfolder floydhub/dl-docker:cpu bash
+    
+Then, update the libraries in the requirements.txt using `pip install -r requirements.txt`. Also [make sure that keras has the tensorflow back end](https://keras.io/backend/).
 
+If a local run without docker is desired, make sure all the dependencies in requirements.txt are installed with keras backend dependency mentioned above.
 
+---    
+
+* Since the models and the data are already available in the repo, you don't need to run the notebooks 1-3 if you just want to test the API; If so, just run the 4th notebook 
+
+* Clone the repo and walk through the notebooks in the order of their numbering for a complete walkthrough.
 
 ### Note:
 
-I'd say this is a baseline experiment and there's so much room to improve upon this setup. Some examples are: Trying different model architectures/parameters, using better cross-validation strategies and using the learned categorical embeddings in a different model.
+I'd say this is a baseline experiment and there's so much room to improve upon this setup. Some examples are:
+
+* Trying different model architectures/parameters.
+* using better cross-validation strategies. 
+* Using the learned categorical embeddings in a different model.
+* The problem is an imbalnced class problem where the class 0 : class 1 ratio is about 1:3. Evaluation metrics other than accuracy (like AUC ROC/PRC, F1 score needs to be considered.
 
 ### Some interesting related posts:
 
 1. [Applying deep learning to Related Pins](https://medium.com/the-graph/applying-deep-learning-to-related-pins-a6fee3c92f5e) by Pinterest.
 2. [Instacart's categorical embedding blog post](https://tech.instacart.com/deep-learning-with-emojis-not-math-660ba1ad6cdc)
+3. [fast.ai blog on deep learning for tabular data](http://www.fast.ai/2018/04/29/categorical-embeddings/)
+
+This repo is mostly inspired by the [repo](https://github.com/entron/entity-embedding-rossmann) by the authors of the original paper and [this kernel](https://www.kaggle.com/aquatic/entity-embedding-neural-net/code) in kaggle.
