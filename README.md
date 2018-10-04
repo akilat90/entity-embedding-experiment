@@ -30,6 +30,25 @@ Once the network is trained for a classification task, we can obtain the W matri
 
 ---
 
+## Local setup instructions
+
+0. Download/clone this project to a local directory, say `<your-local-directory>`.
+1. Install [Docker](https://docs.docker.com/install/#upgrade-path) if you don't have it already.
+2. You can use the [Floydhub docker image](https://github.com/floydhub/dl-docker). Follow these steps:
+
+        docker pull floydhub/dl-docker:cpu
+        docker run -it -p 8888:8888 -p 5000:5000 -v <your-local-directory>:/root/sharedfolder floydhub/dl-docker:cpu bash
+    
+    This will mount `<your-local-directory>` to `/root/sharedfolder` in the container.
+    
+ 3. Then, update the libraries in the [requirements.txt](https://github.com/akilat90/entity-embedding-experiment/blob/master/requirements.txt) using `pip install -r requirements.txt` (this may take some time). Also [make sure that keras has the tensorflow back end](https://keras.io/backend/).
+ 4. Launch a jupyter notebook inside the container at `/root/sharedfolder` by running `jupyter notebook --ip=*`
+ 5. You can now access the project and it's notebooks from `localhost:8888` from your host's browser. 
+
+If a local run without docker is desired, make sure all the dependencies in requirements.txt are installed with keras backend dependency mentioned above.
+
+---    
+
 ## Method of execution
 
 Walk through the notebooks in the below order:
@@ -43,24 +62,11 @@ Most of the code for the network and the related processing is in [embed_helpers
 
 Model serving code is available at [server.py](https://github.com/akilat90/entity-embedding-experiment/blob/master/server.py)
 
----
-
-### Local run instructions
-
-You can use the [Floydhub docker image](https://github.com/floydhub/dl-docker). You may need to follow these steps:
-
-    docker pull floydhub/dl-docker:cpu
-    docker run -it -p 8888:8888 -p 5000:5000 -v /sharedfolder:/root/sharedfolder floydhub/dl-docker:cpu bash
-    
-Then, update the libraries in the requirements.txt using `pip install -r requirements.txt`. Also [make sure that keras has the tensorflow back end](https://keras.io/backend/).
-
-If a local run without docker is desired, make sure all the dependencies in requirements.txt are installed with keras backend dependency mentioned above.
-
----    
-
 * Since the models and the data are already available in the repo, you don't need to run the notebooks 1-3 if you just want to test the API; If so, just run the 4th notebook 
 
-* Clone the repo and walk through the notebooks in the order of their numbering for a complete walkthrough.
+* Walk through the notebooks in the order of their numbering for a complete walkthrough.
+
+---
 
 ### Note:
 
