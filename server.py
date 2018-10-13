@@ -1,5 +1,6 @@
 from keras.models import model_from_json
 from sklearn.externals import joblib
+import pickle
 
 import pandas as pd
 import embed_helpers as eh
@@ -41,13 +42,7 @@ def load_models():
 
 def make_me_acceptable(sample):
 
-    # normalize the numeric columns
-    sample_normalized = eh.normalize_numeric_columns(sample,
-                                                     columns=[c for c in sample.columns if (
-                                                         not c.endswith('_cat'))],
-                                                     scaler=scaler,
-                                                     is_production=True
-                                                     )
+    # change the categorical variables to their respective label encoded values
     cat_names = ['workclass_cat',
                  'education_cat',
                  'marital.status_cat',
@@ -56,6 +51,22 @@ def make_me_acceptable(sample):
                  'race_cat',
                  'sex_cat',
                  'native.country_cat']
+    with open('models/label_encoder_names_dict.pickle', 'rb') as dic:
+        name_map = pickle.load(dic)
+    print("Loaded the dictionary")
+    print(name_map.keys())
+
+    for column in cat_names:
+        print("Mapping for column {0}".format(column))
+        sample[column] = sample[column].map(name_map[column])
+
+    # normalize the numeric columns
+    sample_normalized = eh.normalize_numeric_columns(sample,
+                                                     columns=[c for c in sample.columns if (
+                                                         not c.endswith('_cat'))],
+                                                     scaler=scaler,
+                                                     is_production=True
+                                                     )
 
     # make the input list
     input_list = eh.make_input_list(sample_normalized, cat_names)
@@ -97,6 +108,7 @@ def predict():
         except Exception as e:
             # TODO: handle exceptions specifically - gotta read a bit
             pass
+            print(str(e))
 
     # return a json serialized version of data
     return flask.json.dumps(data)

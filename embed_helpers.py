@@ -146,7 +146,7 @@ def make_input_list(df, cat_names):
     return cat_inputs + numeric_inputs
 
 
-def pre_process_data(df_X, cat_columns, le_path='models/label_encoders.pickle'):
+def pre_process_data(df_X, cat_columns, le_path='models/label_encoders.pickle', le_names_path='models/label_encoder_names_dict.pickle'):
     '''
     The embedding layers expect each categorical variable to be of an integer, which can be achieved by label encoding. 
     This function uses LabelEncoder implementation in scikit-learn.
@@ -174,15 +174,28 @@ def pre_process_data(df_X, cat_columns, le_path='models/label_encoders.pickle'):
     df_X: A pandas dataframe that has the categorical columns label-encoded. Also saves the LabelEncoder object list to le_path.    
     '''
     les = []
+    # to store the label-encoded value mappings
+    les_name_mapping = {}
     for i in cat_columns:
         le = LabelEncoder()
         le.fit(df_X.loc[:, i])
         les.append(le)
         df_X.loc[:, i] = le.transform(df_X.loc[:, i])
+        # storing the mapping
+        les_name_mapping[i] = dict(zip(le.classes_, le.transform(le.classes_)))
+    print('Encoded values are:\n')
+    for i in les_name_mapping.keys():
+        print(i+':\n')
+        print(les_name_mapping[i])
+        print('\n')
 
     with open(le_path, 'wb') as f:
         pickle.dump(les, f, -1)
-    print("label encoders saved to: " + le_path)
+    print("\nlabel encoders saved to: " + le_path)
+
+    with open(le_names_path, 'wb') as f:
+        pickle.dump(les_name_mapping, f, -1)
+    print("\nlabel encoders mapping values saved to: " + le_names_path)
 
     return df_X
 
