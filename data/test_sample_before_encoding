@@ -1,0 +1,11 @@
+workclass_cat,education_cat,marital.status_cat,occupation_cat,relationship_cat,race_cat,sex_cat,native.country_cat,age,fnlwgt,education.num,capital.gain,capital.loss,hours.per.week
+Private,HS-grad,Widowed,Exec-managerial,Not-in-family,White,Female,United-States,82,132870,9,0,4356,18
+Private,7th-8th,Divorced,Machine-op-inspct,Unmarried,White,Female,United-States,54,140359,4,0,3900,40
+Private,Some-college,Separated,Prof-specialty,Own-child,White,Female,United-States,41,264663,10,0,3900,40
+Private,HS-grad,Divorced,Other-service,Unmarried,White,Female,United-States,34,216864,9,0,3770,45
+Private,10th,Separated,Adm-clerical,Unmarried,White,Male,United-States,38,150601,6,0,3770,40
+State-gov,Doctorate,Never-married,Prof-specialty,Other-relative,White,Female,United-States,74,88638,16,0,3683,20
+Federal-gov,HS-grad,Divorced,Prof-specialty,Not-in-family,White,Female,United-States,68,422013,9,0,3683,40
+Private,Doctorate,Divorced,Prof-specialty,Unmarried,Black,Female,United-States,45,172274,16,0,3004,35
+Self-emp-not-inc,Prof-school,Never-married,Prof-specialty,Not-in-family,White,Male,United-States,38,164526,15,0,2824,45
+Private,Bachelors,Widowed,Other-service,Not-in-family,White,Female,United-States,52,129177,13,0,2824,20
